@@ -97,7 +97,9 @@ Sub ProcessStockData()
         Next i
         
     Dim lastOutputRow As Long
-        
+    Dim formatQuarterChange As Range
+    Dim formatPercentChange As Range
+    
         lastOutputRow = outputRow - 1
         
         ' Apply conditional formatting to Quarterly Change Column
@@ -114,20 +116,22 @@ Sub ProcessStockData()
         formatQuarterChange.FormatConditions.Add(xlCellValue, xlLess, "= 0").Interior.Color = RGB(255, 0, 0)
         
         ' Apply conditional formatting to Percent Change Column
-        'For the screeneshot to look exactly like the example on the Module Homework page I would need to 
-	'comment out or remove the Format... lines below.
-	Set formatPercentChange = ws.Range("K2:K" & lastOutputRow)
-        formatPercentChange.FormatConditions.Delete
+        ' For the screeneshot to look exactly like the example on the Module Homework page I would need to
+        ' comment out or remove the Format... lines below. Except, I would have to leave the set range and delete
+        ' lines for a spreadsheet that had previously ran the script with formatPercentChange active.
         
+        Set formatPercentChange = ws.Range("K2:K" & lastOutputRow)
+        formatPercentChange.FormatConditions.Delete
+
         ' Format column to Percent
         formatPercentChange.NumberFormat = "0.00%"
-               
+
         ' Format positive changes to green
         formatPercentChange.FormatConditions.Add(xlCellValue, xlGreater, "= 0").Interior.Color = RGB(0, 255, 0)
-        
+
         ' Format negative changes to red
         formatPercentChange.FormatConditions.Add(xlCellValue, xlLess, "= 0").Interior.Color = RGB(255, 0, 0)
-                
+        
         ' Write greatest values
         ws.Cells(2, 14).Value = "Greatest % Increase"
         ws.Cells(3, 14).Value = "Greatest % Decrease"

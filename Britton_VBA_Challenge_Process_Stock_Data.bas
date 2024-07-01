@@ -114,7 +114,9 @@ Sub ProcessStockData()
         formatQuarterChange.FormatConditions.Add(xlCellValue, xlLess, "= 0").Interior.Color = RGB(255, 0, 0)
         
         ' Apply conditional formatting to Percent Change Column
-        Set formatPercentChange = ws.Range("K2:K" & lastOutputRow)
+        'For the screeneshot to look exactly like the example on the Module Homework page I would need to 
+	'comment out or remove the Format... lines below.
+	Set formatPercentChange = ws.Range("K2:K" & lastOutputRow)
         formatPercentChange.FormatConditions.Delete
         
         ' Format column to Percent
